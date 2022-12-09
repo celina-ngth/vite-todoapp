@@ -13,7 +13,7 @@
         <div class="h3 text-2xl">Pending</div>
         <ul class="flex flex-col space-y-2">
           <li
-            v-for="todo in pending" 
+            v-for="todo in pending"
             :key="todo.id"
             @click="changeStatus(todo.id)"
             class="bg-gray-200 py-2 px-2 text-blue-500 rounded-sm text-center hover:cursor-pointer hover:text-gray-300 hover:bg-blue-500 duration-75"
