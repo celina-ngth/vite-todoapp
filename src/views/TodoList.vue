@@ -8,12 +8,12 @@
       placeholder="New to do"
       @change="addTodo"
     />
-    <div class="flex justify-between">
+    <div>
       <div>
         <div class="h3 text-2xl">Pending</div>
         <ul class="flex flex-col space-y-2">
           <li
-            v-for="todo in pending"
+            v-for="todo in todos.pending"
             :key="todo.id"
             @click="changeStatus(todo.id)"
             class="bg-gray-200 py-2 px-2 text-blue-500 rounded-sm text-center hover:cursor-pointer hover:text-gray-300 hover:bg-blue-500 duration-75"
@@ -28,7 +28,7 @@
           <li
             class="bg-gray-200 py-2 px-2 text-green-500 rounded-sm text-center hover:cursor-pointer hover:text-gray-300 hover:bg-green-500 duration-75"
             @click="changeStatus(todo.id)"
-            v-for="todo in completed"
+            v-for="todo in todos.completed"
             :key="todo.id"
           >
             {{ todo.content }}
@@ -40,36 +40,21 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
+import { useTodoList } from "../stores/todos";
+
+const todos = useTodoList();
 
 const newTodo = ref("");
 
-const todos = ref([]);
-
-const pending = computed(() => {
-  return todos.value.filter((todo) => !todo.done);
-});
-
-const completed = computed(() => {
-  return todos.value.filter((todo) => todo.done);
-});
-
 const addTodo = () => {
   if (newTodo.value) {
-    todos.value.push({
-      id: todos.value.length,
+    todos.addTodo({
+      id: Math.floor(Math.random() * 1000),
       content: newTodo.value,
       done: false,
     });
   }
   newTodo.value = "";
 };
-
-const changeStatus = (id) => {
-  todos.value.find((todo) => {
-    if (todo.id === id) todo.done = !todo.done;
-  });
-};
 </script>
-
-<style></style>

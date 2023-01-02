@@ -1,0 +1,17 @@
+[
+    {
+        "id": 0,
+        "content": "Duarte birthday with friends",
+        "done": false
+    },
+    {
+        "id": 1,
+        "content": "Duarte birthday",
+        "done": true
+    },
+    {
+        "id": 2,
+        "content": "Prepare costume",
+        "done": true
+    }
+]
